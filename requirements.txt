@@ -1,0 +1,11 @@
+Flask
+openai
+uvicorn
+fastapi
+python-dotenv
+requests
+pydantic
+Werkzeug
+SQLite3-0611
+python-multipart
+jinja2
