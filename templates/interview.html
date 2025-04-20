@@ -1,0 +1,457 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mock Interview</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #E3F2FD, #FFEBEE);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1200px;
+      height: 90vh;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .video-section, .questions-section {
+      padding: 30px;
+    }
+
+    .video-section {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      border-right: 1px solid #ccc;
+    }
+
+    .questions-section {
+      flex: 1;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 24px;
+      color: #333;
+    }
+
+    video {
+      width: 100%;
+      max-height: 480px;
+      border-radius: 16px;
+      border: 3px solid #2196F3;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .question {
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      font-size: 16px;
+      color: #444;
+    }
+
+    .questions-section::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .questions-section::-webkit-scrollbar-thumb {
+      background-color: #bbb;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="video-section">
+      <h2>Your Interview Camera</h2>
+      <video id="video" autoplay muted></video>
+    </div>
+
+    <div class="questions-section">
+      <h2>Mock Questions</h2>
+      {% for question in questions %}
+        <div class="question">{{ question }}</div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(stream => {
+        const video = document.getElementById('video');
+        video.srcObject = stream;
+      })
+      .catch(err => {
+        alert("Camera access is required for the mock interview!");
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mock Interview</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #E3F2FD, #FFEBEE);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1200px;
+      height: 90vh;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .video-section, .questions-section {
+      padding: 30px;
+    }
+
+    .video-section {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      border-right: 1px solid #ccc;
+    }
+
+    .questions-section {
+      flex: 1;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 24px;
+      color: #333;
+    }
+
+    video {
+      width: 100%;
+      max-height: 480px;
+      border-radius: 16px;
+      border: 3px solid #2196F3;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .question-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      font-size: 18px;
+      color: #444;
+      min-height: 100px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+
+    #feedback {
+      margin-top: 30px;
+      padding: 25px;
+      background: #e8f5e9;
+      border-left: 6px solid #66bb6a;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: none;
+    }
+    
+    #feedback h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+    
+    #feedback p {
+      margin: 0;
+      font-size: 16px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    #dashboard-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 16px;
+      background-color: #000;
+      color: #fff;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .center-btn {
+      display: flex;
+      justify-content: center;
+    }
+    
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="video-section">
+    <h2>Your Interview Camera</h2>
+    <video id="video" autoplay muted></video>
+  </div>
+
+  <div class="questions-section">
+    <h2>Mock Interview</h2>
+    <div class="question-box" id="question-box">Loading question...</div>
+    <button id="start-btn">Start Answering</button>
+    <button id="next-btn" disabled>Next Question</button>
+    <div id="feedback"></div>
+    <div class="center-btn">
+      <button id="dashboard-btn" onclick="window.location.href='/dashboard'">Go Back to Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add this before your closing </body> tag -->
+<script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script>
+  let questions = {{ questions | tojson }};
+  const userAnswers = [];
+  let currentIndex = 0;
+
+  const questionBox = document.getElementById("question-box");
+  const startBtn = document.getElementById("start-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const feedbackBox = document.getElementById("feedback");
+  const dashboardBtn = document.getElementById("dashboard-btn");
+  const video = document.getElementById("video");
+
+  // 🎭 Expression feedback overlay
+  const expressionPopup = document.createElement("div");
+  expressionPopup.style.position = "absolute";
+  expressionPopup.style.top = "10px";
+  expressionPopup.style.left = "50%";
+  expressionPopup.style.transform = "translateX(-50%)";
+  expressionPopup.style.background = "rgba(0,0,0,0.7)";
+  expressionPopup.style.color = "white";
+  expressionPopup.style.padding = "10px 20px";
+  expressionPopup.style.borderRadius = "12px";
+  expressionPopup.style.fontSize = "16px";
+  expressionPopup.style.zIndex = "1000";
+  expressionPopup.style.display = "none";
+  document.body.appendChild(expressionPopup);
+
+  function showExpressionFeedback(message) {
+    expressionPopup.textContent = message;
+    expressionPopup.style.display = "block";
+    setTimeout(() => {
+      expressionPopup.style.display = "none";
+    }, 3000);
+  }
+
+  // Load face-api models
+  async function loadFaceApiModels() {
+    const MODEL_URL = '/static/models';
+    await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+    await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL);
+  }
+
+  async function startExpressionDetection() {
+    const options = new faceapi.TinyFaceDetectorOptions();
+    setInterval(async () => {
+      const result = await faceapi.detectSingleFace(video, options).withFaceExpressions();
+      if (result && result.expressions) {
+        const { expressions } = result;
+        const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
+        const [topExpression, confidence] = sorted[0];
+
+        console.log("Expression scores:", expressions);
+        console.log("Top:", topExpression, confidence);
+
+        if (confidence > 0.2) {
+          switch (topExpression) {
+            case 'happy':
+              showExpressionFeedback("😊 You're looking confident!");
+              break;
+            case 'sad':
+              showExpressionFeedback("😢 Try to stay positive.");
+              break;
+            case 'fearful':
+              showExpressionFeedback("😟 Try to relax. You look a bit nervous.");
+              break;
+            case 'angry':
+              showExpressionFeedback("😠 Stay calm and composed.");
+              break;
+            case 'surprised':
+              showExpressionFeedback("😯 Try not to look too surprised.");
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    }, 4000); // Check every 4 seconds
+  }
+
+  function speakText(text) {
+    const synth = window.speechSynthesis;
+    synth.cancel(); // Stop any previous speech
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 1;
+    synth.speak(utterance);
+  }
+  
+
+  // Question logic
+  function loadQuestion(index) {
+    if (index < questions.length) {
+      const question = questions[index];
+      questionBox.textContent = question;
+      nextBtn.disabled = true;
+      speakText(question); // 👈 Speak the question out loud
+    } else {
+      submitAnswers();
+    }
+  }
+  
+
+  startBtn.addEventListener("click", () => {
+    if (recognition) {
+      startBtn.textContent = "Listening...";
+      startBtn.disabled = true;
+      recognition.start();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex++;
+    loadQuestion(currentIndex);
+  });
+
+  function submitAnswers() {
+    questionBox.textContent = "Analyzing your responses...";
+    startBtn.style.display = "none";
+    nextBtn.style.display = "none";
+  
+    fetch("/submit-answers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ questions, answers: userAnswers })
+    })
+    .then(res => res.json()) // First .then to parse the JSON
+    .then(data => {
+      feedbackBox.innerHTML = `
+        <h3 style="margin-top: 0; font-size: 22px; color: #1b5e20;">Final Feedback</h3>
+        <p style="font-size: 18px; color: #333;">${data.feedback}</p>
+      `;
+      feedbackBox.style.display = "block";
+      questionBox.textContent = "Interview complete.";
+      dashboardBtn.style.display = "inline-block"; 
+    })
+    .catch(err => {
+      feedbackBox.innerHTML = `<p style="color: red;">Something went wrong. Please try again.</p>`;
+      feedbackBox.style.display = "block";
+      console.error(err);
+    });
+  }  
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadQuestion(currentIndex);
+  });
+
+  // Initialize video
+  navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    .then(async stream => {
+      video.srcObject = stream;
+      await loadFaceApiModels(); // Load models once video is ready
+      startExpressionDetection(); // Start feedback
+    })
+    .catch(err => {
+      alert("Camera access is required for the mock interview!");
+      console.error(err);
+    });
+
+  // Speech recognition
+  let recognition;
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+
+    recognition.onresult = function (event) {
+      const transcript = event.results[0][0].transcript;
+      userAnswers.push(transcript);
+      nextBtn.disabled = false;
+      startBtn.disabled = false;
+      startBtn.textContent = "Start Answering";
+    };
+
+    recognition.onerror = function (event) {
+      alert("Speech recognition error: " + event.error);
+      startBtn.disabled = false;
+      startBtn.textContent = "Start Answering";
+    };
+  } else {
+    alert("Your browser does not support Speech Recognition.");
+    startBtn.disabled = true;
+  }
+</script>
+
+</body>
+</html>
